@@ -14,12 +14,12 @@ exports[`should reder Expense list filters correctly 1`] = `
     <option
       value="date"
     >
-       Date 
+      Date
     </option>
     <option
       value="amount"
     >
-       Amount 
+      Amount
     </option>
   </select>
   <withStyles(DateRangePicker)
@@ -142,12 +142,12 @@ exports[`should reder Expense list with altFilters correctly 1`] = `
     <option
       value="date"
     >
-       Date 
+      Date
     </option>
     <option
       value="amount"
     >
-       Amount 
+      Amount
     </option>
   </select>
   <withStyles(DateRangePicker)
