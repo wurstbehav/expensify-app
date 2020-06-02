@@ -5,7 +5,8 @@ import {
     removeExpense,
     setExpenses,
     startsetExpenses,
-    startremoveExpense
+    startremoveExpense,
+    starteditExpense
 } from '../../actions/expenses'
 import expenses from '../fixtures/expenses'
 import thunk from 'redux-thunk'
@@ -49,6 +50,25 @@ test('should remove expense from firebsae', (done) => {
 
 })
 
+test('should remove expense from firebsae', (done) => {
+    const store = createMockStore({})
+    const id = expenses[2].id
+    const updates = {
+        note: 'updated',
+    }
+    store.dispatch(starteditExpense(id, updates)).then(() => {
+        const actions = store.getActions()
+        expect(actions[0]).toEqual({ //toBeFasly
+            type: 'EDIT_EXPENSE',
+            id,
+            updates
+        });
+        return database.ref(`expenses/${id}`).once('value').then((snapshot) => {
+            expect(snapshot.val().note).toEqual(updates.note);
+            done()
+        })
+    })
+})
 
 test('should setup edit expense action object', () => {
     const action = editExpense('123abc', { note: 'New Note Value' })
