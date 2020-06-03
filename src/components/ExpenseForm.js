@@ -17,6 +17,7 @@ export default class Expenseform extends React.Component {
         }
     }
 
+
     onDescriptionChange = (e) => {
         const description = e.target.value
         this.setState(() => ({ description }))
@@ -50,7 +51,7 @@ export default class Expenseform extends React.Component {
         e.preventDefault()
 
         if (!this.state.description || !this.state.amount) {
-            this.setState(() => ({ error: 'PLEASE PROVIDE DESCRIPTION AND AMOUNT' }))
+            this.setState(() => ({ error: 'Please provide description and amount.' }))
 
         } else {
             this.setState(() => ({ error: '' }))
@@ -64,45 +65,43 @@ export default class Expenseform extends React.Component {
     }
     render() {
         return (
-            <div>
+
+            <form className="form" onSubmit={this.onSubmit}>
                 {
-                    this.state.error && <p>{this.state.error}</p> //checks if (this.state.error) is true or false . empty string is false so acts as this line doesnot exist. if string exists it is true and following jsx runs
+                    this.state.error && <p className="form-error">{this.state.error}</p> //checks if (this.state.error) is true or false . empty string is false so acts as this line doesnot exist. if string exists it is true and following jsx runs
                 }
+                <input className="text-input"
+                    type="text"
+                    placeholder="Description"
+                    autoFocus
+                    value={this.state.description}
+                    onChange={this.onDescriptionChange}
+                />
+                <input className="text-input"
+                    type="text"
+                    placeholder="Amount"
+                    value={this.state.amount}
+                    onChange={this.onAmountChange}
+                />
+                <SingleDatePicker
+                    date={this.state.createdAt}
+                    onDateChange={this.onDateChange}
+                    focused={this.state.calendarFocused}
+                    onFocusChange={this.onFocusChange}
+                    numberOfMonths={1}
+                    isOutsideRange={() => false}
+                />
 
-                <form onSubmit={this.onSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Description"
-                        autoFocus
-                        value={this.state.description}
-                        onChange={this.onDescriptionChange}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Amount"
-                        value={this.state.amount}
-                        onChange={this.onAmountChange}
-                    />
-                    <SingleDatePicker
-                        date={this.state.createdAt}
-                        onDateChange={this.onDateChange}
-                        focused={this.state.calendarFocused}
-                        onFocusChange={this.onFocusChange}
-                        numberOfMonths={1}
-                        isOutsideRange={() => false}
-                    />
-
-                    <textarea
-                        placeholder="Add a note for your expense (optional)"
-                        value={this.state.note}
-                        onChange={this.onNoteChange}
-                    >
-                    </textarea>
-                    <button>Add Expense</button>
-                </form>
-            </div>
-
-
+                <textarea className="text-area"
+                    placeholder="Add a note for your expense (optional)"
+                    value={this.state.note}
+                    onChange={this.onNoteChange}
+                >
+                </textarea>
+                <div>
+                    <button className="button">Save Expense</button>
+                </div>
+            </form>
         )
     }
 

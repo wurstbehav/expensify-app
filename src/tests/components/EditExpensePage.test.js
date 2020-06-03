@@ -32,8 +32,9 @@ test('should handle starteditExpense', () => {
     expect(starteditExpense).toHaveBeenLastCalledWith(expenses[2].id, expenses[2])
 })
 
-test('should handle startremoveExpense', () => {
-    wrapper.find('button').simulate('click')
-    expect(history.push).toHaveBeenLastCalledWith('/')
-    expect(startremoveExpense).toHaveBeenLastCalledWith({ id: expenses[2].id })
-})
+//-------SWEET ALERT HANDLES IT -----------//
+// test('should handle startremoveExpense', () => {
+//     wrapper.find('button').simulate('click')
+//     expect(history.push).toHaveBeenLastCalledWith('/')
+//     expect(startremoveExpense).toHaveBeenLastCalledWith({ id: expenses[2].id })
+// })
