@@ -12,6 +12,11 @@ export const ExpensesSummary = (props) => {
     return (
         <div className="page-header">
             <div className="content-container">
+                {
+                    props.expensesCount < props.totalExpenses &&
+                    <p className="form-error">Not showing all {props.totalExpenses} expenses because of filters.</p>
+                }
+
                 <h1 className="page-header__title">Viewing <span>{props.expensesCount}</span> {expenseWord} totalling <span>{formattedExpensesTotal}</span></h1>
                 <div className='page-header__actions'>
                     <Link className='button' to="/create">Add Expense</Link>
@@ -22,10 +27,12 @@ export const ExpensesSummary = (props) => {
 }
 
 const mapStateToProps = (state) => {
+    const totalExpenses = state.expenses.length
     const visibleExpenses = getVisibleExpenses(state.expenses, state.filters)
     return {
         expensesCount: visibleExpenses.length,
-        expesesTotal: getExpensesTotal(visibleExpenses)
+        expesesTotal: getExpensesTotal(visibleExpenses),
+        totalExpenses
     }
 }
 
